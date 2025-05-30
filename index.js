@@ -6,7 +6,7 @@ const ejs = require('ejs')
 const path = require('path')
 const staticRoute = require('./routes/staticRouter')
 const userRouter = require('./routes/user')
-const restrictToLoggedInUsersOnly = require('./middlewares/auth')
+const {restrictToLoggedInUsersOnly,checkAuth} = require('./middlewares/auth')
 const cookieParser = require('cookie-parser')
 
 
@@ -21,10 +21,10 @@ app.set("view engine","ejs")
 app.set("views", path.resolve("./views"))
 app.use(cookieParser())
 
-app.use('/',staticRoute)
 app.use('/url',restrictToLoggedInUsersOnly,urlRouter)
 app.use('/user',userRouter)
+app.use('/',checkAuth,staticRoute)
 
-app.listen(PORT,()=>{
+app.listen(PORT,()=>{ 
     console.log(`Server running at ${PORT}`)
 })
