@@ -14,6 +14,10 @@
         --bs-body-font-family: var(--bs-font-monospace);
         --bs-body-line-height: 1.4;
         --bs-body-bg: var(--bs-gray-100);
+        width: 70%;
+        height: 70%;
+        background-color: aliceblue;
+        padding: 5px;
       }
       #container {
         width: 50%;
@@ -32,7 +36,6 @@
     </style>
   </head>
   <body>
-
     <!-- The data from the backend is served in locals -->
     <h1>URL Generator</h1>
     <% if (locals.id) { %>
@@ -56,18 +59,20 @@
             <th>Clicks</th>
           </thead>
         <tbody>
-          <% urls.forEach((url,index) => { %>
-           <tr>
-            <td><%=index + 1 %></td>
-            <td><%=url.shortId %></td>
-            <td><%=url.redirectUrl %></td>
-            <td><%=(url.visitHistory.length) %></td>
-           </tr>
-          <% }) %>
+           <% urls.forEach((url,index) => { %>
+            <tr>
+              <td><%=index + 1 %></td>
+              <td><%=url.shortId %></td>
+              <td><%=url.redirectUrl %></td>
+              <td><%=(url.visitHistory.length) %></td>
+            </tr>
+           <% }) %>
         </tbody>
         </table>
         <% } %>
       </div>
     </form>
+    <a href="/signup"><button>Signup</button></a>
+    <a href="/login"><button>Login</button></a>
   </body>
 </html>

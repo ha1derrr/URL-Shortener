@@ -6,15 +6,18 @@ async function generateShortUrl(req, res) {
   if (!body.url) {
     return res.status(404).json({ error: "URL is required" });
   }
-  const id = shortId(8);
-  await url.create({
-    shortId: id,
-    redirectUrl: body.url,
-    visitHistory: [],
-  });
-    return res.render('home',{
-      id:id
-    })
+    const id = shortId(8);
+    await url.create({
+      shortId: id,
+      redirectUrl: body.url,
+      visitHistory: [],
+      // This line below is important
+      createdBy:req.user._id
+    });
+      return res.render('home',{
+        id:id
+      })
+
 }
 
 async function getAnalytics(req, res) {

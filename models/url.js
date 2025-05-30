@@ -8,9 +8,14 @@ const userSchema = new mongoose.Schema({
     },
     redirectUrl:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     visitHistory:[{timeStamp : { type:Number }}],
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"users"
+    }
 
 },{timestamps:true})
 
